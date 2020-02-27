@@ -26,6 +26,15 @@ public class Circle extends Points {
     public float getR(){
         return r;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public int getDiameter(){
         return diameter;
     }

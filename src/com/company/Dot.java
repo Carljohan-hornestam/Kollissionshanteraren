@@ -19,6 +19,14 @@ public class Dot extends Points {
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public static List createDots(ArrayList<Dot> dots, int numberOfDots){
         for (int i = 0; i < numberOfDots; i++){
             dots.add(new Dot());

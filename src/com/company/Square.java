@@ -9,16 +9,12 @@ public class Square extends Points {
     public int bottomLeftY;
     public int topRightX;
     public int topRightY;
-    public int sideA;
-    public int sideB;
 
     public Square(){
         bottomLeftX = setRandomX1();
         bottomLeftY = setRandomY1();
         topRightX = setX2(bottomLeftX);
         topRightY = setY2(bottomLeftY);
-        sideA = 5;
-        sideB = 5;
     }
     public int getBottomLeftX(){
         return bottomLeftX;
@@ -32,13 +28,28 @@ public class Square extends Points {
     public int getTopRightY(){
         return topRightY;
     }
-    public int getSideA(){return sideA;}
-    public int getSideB(){return sideB;}
+
+    public void setBottomLeftX(int bottomLeftX) {
+        this.bottomLeftX = bottomLeftX;
+    }
+
+    public void setBottomLeftY(int bottomLeftY) {
+        this.bottomLeftY = bottomLeftY;
+    }
+
+    public void setTopRightX(int topRightX) {
+        this.topRightX = topRightX;
+    }
+
+    public void setTopRightY(int topRightY) {
+        this.topRightY = topRightY;
+    }
 
     public static List createSquares(ArrayList<Square> squares, int numberofSquares){
         for (int i = 0; i < numberofSquares; i++){
             squares.add(new Square());
             System.out.println("Square created with coordinates " + squares.get(i).x1 + "," + squares.get(i).y1);
+            System.out.println();
         }
         return squares;
     }

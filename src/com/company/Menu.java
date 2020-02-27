@@ -5,8 +5,11 @@ import java.util.Scanner;
 
 public class Menu {
     Scanner scan = new Scanner(System.in);
+    Points point = new Points();
+    CollisionChecker checker = new CollisionChecker();
     private boolean b;
     private String choice = "";
+    private String restartMenuChoice = "";
     private int playField;
     private int numberOfDots;
     private int numberOfCircles;
@@ -49,10 +52,49 @@ public class Menu {
         numberOfSquares = scan.nextInt();
         ArrayList<Square> squares = new ArrayList<>();
         Square.createSquares(squares, numberOfSquares);
-        CollisionChecker checker = new CollisionChecker();
-        checker.checkForCollisions(dots, circles, squares);
-        checker.checkCircleSquareCollide(circles, squares);
-        checker.checkDotCollisions(dots, squares, circles);
+
+        checker.checkDotVsDotCollisions(dots);
+        checker.checkCircleVsCircleCollisions(circles);
+        checker.checkSquareVsSquareCollisions(squares);
+        checker.checkCircleVsSquareCollide(circles, squares);
+        checker.checkDotVsSquareCollisions(dots, squares);
+        checker.checkDotVsCircleCollisions(dots, circles);
+
+        restartMenu(dots, circles, squares);
     }
 
+    public void restartMenu(ArrayList<Dot> dots, ArrayList<Circle> circles, ArrayList<Square> squares) {
+        System.out.println("1: Restart");
+        System.out.println("2: Quit");
+        do {
+            restartMenuChoice = scan.nextLine();
+            if (restartMenuChoice.equals("1")) {
+                restart(dots, circles, squares);
+            }
+        } while (!restartMenuChoice.equals("2"));
+    }
+    public void restart(ArrayList<Dot> dots, ArrayList<Circle> circles, ArrayList<Square> squares){
+        for (Dot dot : dots) {
+            dot.setX(point.setRandomX1());
+            dot.setY(point.setRandomY1());
+        }
+        for (Circle circle : circles) {
+            circle.setX(point.setRandomX1());
+            circle.setY(point.setRandomY1());
+        }
+        for (Square square : squares){
+            square.setBottomLeftX(point.setRandomX1());
+            square.setBottomLeftY(point.setRandomY1());
+            square.setTopRightX(point.setX2(square.getBottomLeftX()));
+            square.setTopRightY(point.setY2(square.getBottomLeftY()));
+        }
+        checker.checkDotVsDotCollisions(dots);
+        checker.checkCircleVsCircleCollisions(circles);
+        checker.checkSquareVsSquareCollisions(squares);
+        checker.checkCircleVsSquareCollide(circles, squares);
+        checker.checkDotVsSquareCollisions(dots, squares);
+        checker.checkDotVsCircleCollisions(dots, circles);
+
+        restartMenu(dots, circles, squares);
+    }
 }

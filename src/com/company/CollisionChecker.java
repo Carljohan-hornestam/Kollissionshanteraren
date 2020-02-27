@@ -3,11 +3,8 @@ package com.company;
 import java.util.ArrayList;
 
 public class CollisionChecker {
-    public CollisionChecker() {
-    }
 
-
-    public void checkForCollisions(ArrayList<Dot> dots, ArrayList<Circle> circles, ArrayList<Square> squares) {
+    public void checkDotVsDotCollisions(ArrayList<Dot> dots) {
         for (int i = 0; i < dots.size(); i++) {
             for (int j = i + 1; j < dots.size(); j++) {
                 if (dots.get(i).getX() == dots.get(j).getX() && dots.get(i).getY() == dots.get(j).getY()) {
@@ -15,7 +12,8 @@ public class CollisionChecker {
                 }
             }
         }
-        System.out.println();
+    }
+    public void checkCircleVsCircleCollisions(ArrayList<Circle> circles) {
         for (int i = 0; i < circles.size(); i++) {
             for (int j = i + 1; j < circles.size(); j++) {
                 if (Math.pow(circles.get(i).getX() - circles.get(j).getX(), 2) + Math.pow(circles.get(i).getY() - circles.get(j).getY()
@@ -25,6 +23,8 @@ public class CollisionChecker {
                 }
             }
         }
+    }
+    public void checkSquareVsSquareCollisions(ArrayList<Square> squares){
         for (int i = 0; i < squares.size(); i++) {
             for (int j = i + 1; j < squares.size(); j++) {
                 if (squares.get(i).getBottomLeftY() > squares.get(j).getTopRightY() || squares.get(i).getTopRightY() < squares.get(j)
@@ -41,7 +41,7 @@ public class CollisionChecker {
         }
     }
 
-    public void checkCircleSquareCollide(ArrayList<Circle> circles, ArrayList<Square> squares) {
+    public void checkCircleVsSquareCollide(ArrayList<Circle> circles, ArrayList<Square> squares) {
         for (int i = 0; i < circles.size(); i++) {
             for (int j = 0; j < squares.size(); j++) {
                 if (circles.get(i).getX() + circles.get(i).getR() < squares.get(j).getBottomLeftX() || circles.get(i).getY() +
@@ -56,17 +56,33 @@ public class CollisionChecker {
             }
         }
     }
-    public void checkDotCollisions(ArrayList<Dot> dots, ArrayList<Square> squares, ArrayList<Circle> circles){
+    public void checkDotVsSquareCollisions(ArrayList<Dot> dots, ArrayList<Square> squares){
         for (int i = 0; i < dots.size(); i++){
             for (int j = 0; j < squares.size(); j++){
                 if (dots.get(i).getX() > squares.get(j).getBottomLeftX() & dots.get(i).getY() > squares.get(j).getBottomLeftY() &&
                         dots.get(i).getX() < squares.get(j).getTopRightX() & dots.get(i).getY() < squares.get(j).getTopRightY()){
                     System.out.println("Dot with coordinates " + dots.get(i).getX() + "," + dots.get(i).getY() +
-                            "collided with square with top right coordinates of " + squares.get(j).getTopRightX() + "," +
+                            " collided with square with top right coordinates of " + squares.get(j).getTopRightX() + "," +
                             squares.get(j).getTopRightY() + " and bottom left coordinates of " +
                             squares.get(j).getBottomLeftX() + "," + squares.get(j).getBottomLeftY() + "\n");
                 }
                 else{
+                }
+            }
+        }
+    }
+    public void checkDotVsCircleCollisions(ArrayList<Dot> dots, ArrayList<Circle> circles){
+        for (int i = 0; i < dots.size(); i++){
+            for (int j = 0; j < circles.size(); j++){
+                if (dots.get(i).getX() > circles.get(j).getX() + circles.get(j).getR() || dots.get(i).getY()
+                        < circles.get(j).getY() - circles.get(j).getR() || dots.get(i).getX() <
+                circles.get(j).getX() - circles.get(j).getR() || dots.get(i).getY() > circles.get(j).getY() + circles.get(j).getY()){
+
+                }
+                else{
+                    System.out.println("Dot with coordinates " + dots.get(i).getX() + "," + dots.get(i).getY() +
+                            " collided with circle with coordinates of " + circles.get(j).getX() + "," +
+                            circles.get(j).getY());
                 }
             }
         }
