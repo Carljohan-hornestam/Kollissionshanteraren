@@ -10,7 +10,7 @@ public class Menu {
     private boolean b;
     private String choice = "";
     private String restartMenuChoice = "";
-    private int playField;
+    public static int playField;
     private int numberOfDots;
     private int numberOfCircles;
     private int numberOfSquares;
@@ -83,10 +83,10 @@ public class Menu {
             circle.setY(point.setRandomY1());
         }
         for (Square square : squares){
-            square.setBottomLeftX(point.setRandomX1());
-            square.setBottomLeftY(point.setRandomY1());
-            square.setTopRightX(point.setX2(square.getBottomLeftX()));
-            square.setTopRightY(point.setY2(square.getBottomLeftY()));
+            square.setTopRightX(point.setRandomX1());
+            square.setTopRightY(point.setRandomY1());
+            square.setBottomLeftX(point.setX2(square.getTopRightX()));
+            square.setBottomLeftY(point.setY2(square.getTopRightY()));
         }
         checker.checkDotVsDotCollisions(dots);
         checker.checkCircleVsCircleCollisions(circles);

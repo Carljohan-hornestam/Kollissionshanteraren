@@ -5,16 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Square extends Points {
-    public int bottomLeftX;
-    public int bottomLeftY;
     public int topRightX;
     public int topRightY;
+    public int bottomLeftX;
+    public int bottomLeftY;
 
     public Square(){
-        bottomLeftX = setRandomX1();
-        bottomLeftY = setRandomY1();
-        topRightX = setX2(bottomLeftX);
-        topRightY = setY2(bottomLeftY);
+        topRightX = setRandomX1();
+        topRightY = setRandomY1();
+        bottomLeftX = setX2(topRightX);
+        bottomLeftY = setY2(topRightY);
     }
     public int getBottomLeftX(){
         return bottomLeftX;
